@@ -1524,5 +1524,5 @@ accha isme or simple form kya difference h ki isme hum apne form ke rules ko ek 
 or simple form me hume manually validation karna padta hai jab form submit hota hai jese ki email me @ hona chahiye, password minimum 6 characters ka hona chahiye, etc.
 accha yupresolver kya krta h ki wo yup validation schema ko react-hook-form ke sath integrate karne ke liye use hota hai taki hum apne form ke rules ko ek jagah define kar sake aur wo rules automatic check hote rahe jab form submit hota hai
 accha yha hum useState ka use kyu nhi kr rhe h ki form ke state ko manage karne ke liye useForm hook ka use kr rhe h jo react-hook-form ka part hai aur wo form state ko efficiently manage karta hai jese ki input values, errors, etc.
-
+https://github.com/Rohitbhadoriya/mobil-aap-tuto
 */
