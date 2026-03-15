@@ -1526,3 +1526,173 @@ accha yupresolver kya krta h ki wo yup validation schema ko react-hook-form ke s
 accha yha hum useState ka use kyu nhi kr rhe h ki form ke state ko manage karne ke liye useForm hook ka use kr rhe h jo react-hook-form ka part hai aur wo form state ko efficiently manage karta hai jese ki input values, errors, etc.
 https://github.com/Rohitbhadoriya/mobil-aap-tuto
 */
+// npm install @react-navigation/native @react-navigation/native-stack @react-navigation/bottom-tabs
+// npx expo install react-native-screens react-native-safe-area-context
+/*
+npm install expo
+npx expo install react-native-screens react-native-safe-area-context
+*/
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { View, Text, TextInput, Button, Alert } from 'react-native';
+// import { useState } from 'react';
+
+// Login Screen
+// function LoginScreen({ navigation }) {
+//   const [email, setEmail] = useState('');
+
+//   const handleLogin = () => {
+//     if (!email.trim()) {
+//       Alert.alert('Error', 'Email daalo bhai!');
+//       return;
+//     }
+//     // Success → replace karo taaki back na aaye
+//     navigation.replace('Main', { userEmail: email });
+//   };
+
+//   return (
+//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+//       <Text style={{ fontSize: 24, marginBottom: 20 }}>Login Screen</Text>
+//       <TextInput
+//         placeholder="Enter Email"
+//         value={email}
+//         onChangeText={setEmail}
+//         style={{ borderWidth: 1, padding: 12, width: '80%', marginBottom: 20, borderRadius: 8 }}
+//       />
+//       <Button title="Login" onPress={handleLogin} color="#0066ff" />
+//     </View>
+//   );
+// }
+
+// Home Screen
+// function HomeScreen({ route }) {
+//   const { userEmail } = route.params || {};
+//   return (
+//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//       <Text style={{ fontSize: 28 }}>Welcome Home!</Text>
+//       <Text style={{ fontSize: 18, marginTop: 10 }}>
+//         Logged in as: {userEmail ? userEmail : 'Unknown User'}
+//       </Text>
+//     </View>
+//   );
+// }
+
+// Profile Screen
+// function ProfileScreen() {
+//   return (
+//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//       <Text style={{ fontSize: 28 }}>Profile Screen</Text>
+//       <Text>Edit your details here</Text>
+//     </View>
+//   );
+// }
+
+// Bottom Tabs
+// const Tab = createBottomTabNavigator();
+
+// function MainTabs() {
+//   return (
+//     <Tab.Navigator
+//       screenOptions={{
+//         tabBarActiveTintColor: '#0066ff',
+//         tabBarInactiveTintColor: 'gray',
+//       }}
+//     >
+//       <Tab.Screen name="Home" component={HomeScreen} />
+//       <Tab.Screen name="Profile" component={ProfileScreen} />
+//     </Tab.Navigator>
+//   );
+// }
+
+// // Stack Navigator
+// const Stack = createNativeStackNavigator();
+
+
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator screenOptions={{ headerShown: false }}>
+//         <Stack.Screen name="Login" component={LoginScreen} />
+//         <Stack.Screen name="Main" component={MainTabs} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+/*
+Yha pr humne ek simple login screen banaya hai jisme user apna email daltey hai aur login button press karta hai to wo home screen pe chala jata hai jaha uska email show hota hai
+NavigationContainer → ye app ke navigation ko manage karta hai
+createNativeStackNavigator → ye ek stack navigator banata hai jisme hum screens ko stack ke form me arrange karte hai
+createBottomTabNavigator → ye ek bottom tab navigator banata hai jisme hum screens ko tabs ke form me arrange karte hai
+navigation.replace → ye current screen ko replace karta hai taaki user back button se login screen pe na ja sake
+route.params → ye current screen ke route parameters ko access karta hai jese ki userEmail jo login screen se pass kiya gaya tha
+isme abi unknown user ka case handle kiya hai jese ki agar user email nahi dalta hai to home screen pe unknown user show hoga
+*/
+
+
+
+
+
+
+// Project lecture mode 8 
+
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// import LoginScreen from './Screens/LoginScreen';
+// import HomeScreen from './Screens/HomeScreen';
+// import ProfileScreen from './Screens/ProfileScreen';
+
+// const Stack = createNativeStackNavigator();
+// const Tab = createBottomTabNavigator();
+
+// function MainTabs({ route }) {
+//   const { studentName } = route.params || { studentName: 'Guest' };
+
+//   return (
+//     <Tab.Navigator
+//       screenOptions={{
+//         tabBarActiveTintColor: '#4CAF50',
+//         tabBarInactiveTintColor: 'gray',
+//         headerShown: false,
+//       }}
+//     >
+//       <Tab.Screen 
+//         name="Home" 
+//         component={HomeScreen} 
+//         initialParams={{ studentName }} 
+//       />
+//       <Tab.Screen 
+//         name="Profile" 
+//         component={ProfileScreen} 
+//         initialParams={{ studentName }} 
+//       />
+//     </Tab.Navigator>
+//   );
+// }
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator screenOptions={{ headerShown: false }}>
+//         <Stack.Screen name="Login" component={LoginScreen} />
+//         <Stack.Screen name="Main" component={MainTabs} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+
+
+
+// Module 8 part 6v 
+// App.tsx
+import React from 'react';
+import AppNavigator from './navigation/AppNavigator';
+
+export default function App() {
+  return <AppNavigator />;
+}
