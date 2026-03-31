@@ -1690,9 +1690,221 @@ isme abi unknown user ka case handle kiya hai jese ki agar user email nahi dalta
 
 // Module 8 part 6v 
 // App.tsx
-import React from 'react';
-import AppNavigator from './navigation/AppNavigator';
+// import React from 'react';
+// import AppNavigator from './navigation/AppNavigator';
 
-export default function App() {
-  return <AppNavigator />;
+// export default function App() {
+//   return <AppNavigator />;
+// }
+
+
+
+
+
+// module 9 part 4 
+
+// App.js (ya jo bhi file hai jisme main component hai)
+// React Native Play Store jaisa screen – 2 versions ek hi code mein
+import { StyleSheet, Text, View, ScrollView, FlatList,TouchableOpacity, SafeAreaView, StatusBar, Image, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
+
+const appsData = {
+  // Games Category
+  games:[
+    {
+      id:"1",
+      name:"Free Fire Max",
+      category:"Battle Royale",
+      rating:'4.5',
+      download:"100M+",
+      icon:"https://de.apkshub.com/images/c2/com.dts.freefiremax/icon.png"
+    },
+      {
+      id:"2",
+      name:"PUBG Mobile",
+      category:"Battle Royale",
+      rating:'4.3',
+      download:"500M+",
+      icon:"https://play-lh.googleusercontent.com/_hITCaObfE2LSkWq9_ydYMmUXxVfexoRc5qA8GJy0GtSg_ee3ZKqwGPGa7KOjuG2j7E"
+    },
+     {
+      id:"3",
+      name:"Candy Crush",
+      category:"Puzzle",
+      rating:'4.3',
+      download:"500M+",
+      icon:"https://cdn3d.iconscout.com/3d/free/preview/free-candy-crush-3d-icon-png-download-10299046.png?f=webp&h=700"
+    },
+      {
+      id:"4",
+      name:"Ludo King",
+      category:"Board",
+      rating:'4.3',
+      download:"500M+",
+      icon:"https://play-lh.googleusercontent.com/oBqZMuqwsJAmcbME1nyxtbF3cv-gtU_n8Rqv-11CzA0_amztActsOMTkNKy9iHgqwRuZ=w240-h480-rw"
+    },
+       {
+      id:"5",
+      name:"Subway Surfers",
+      category:"Arcade",
+      rating:'4.3',
+      download:"500M+",
+      icon:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmLObGiAAgCMDxSvt9Zr8IlUYvyI9Kwwdrjg&s"
+    },
+
+  ],
+  apps:[
+    {
+      id:"6",
+      name:"WhatsApp",
+      category:"Communication",
+      rating:'4.5',
+      download:"10B+",
+      icon:"https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-whatsapp-icon-png-image_6315990.png"
+    },
+      {
+      id:"7",
+      name:"Instagram",
+      category:"Social Media",
+      rating:'4.3',
+      download:"500M+",
+      icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1280px-Instagram_icon.png"
+    },
+     {
+      id:"8",
+      name:"YouTube",
+      category:"Video",
+      rating:'4.3',
+      download:"500M+",
+      icon:"https://static.vecteezy.com/system/resources/previews/011/998/173/non_2x/youtube-icon-free-vector.jpg"
+    },
+      {
+      id:"9",
+      name:"Snapchat",
+      category:"Social",
+      rating:'4.3',
+      download:"500M+",
+      icon:"https://cdn-icons-png.flaticon.com/512/174/174870.png"
+    },
+       {
+      id:"10",
+      name:"Facebook",
+      category:"Social",
+      rating:'4.3',
+      download:"500M+",
+      icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1280px-2021_Facebook_icon.svg.png"
+    },
+
+  ]
 }
+const AppCard = ({item,onInstall})=>{
+  const [isPressed,setisPressed] = useState(false)
+return(
+  <TouchableOpacity
+  activeOpacity={0.88}
+  onPressIn={()=>setisPressed(true)}
+  onPressOut={()=>setisPressed(false)}  
+  style={[styles.card, isPressed && styles.cardPressed]}
+  
+  >
+<Image
+source={{uri:item.icon}}
+style={styles.icon}
+/>
+<View style={styles.content}>
+  <Text style={styles.name} numberOfLines={1}>{item.name}</Text>
+  <Text style={styles.category}>{item.category}</Text>
+  <Text style={styles.meta}>{item.rating} {item.download}</Text>
+
+</View>
+  </TouchableOpacity>
+)
+}
+// PART 4: Section Header
+const SectionHeader = ({ title }) => (
+  <View style={styles.header}>
+    <Text style={styles.title}>{title}</Text>
+    <TouchableOpacity>
+      <Text style={styles.seeAll}>See All →</Text>
+    </TouchableOpacity>
+  </View>
+);
+
+// PART 5: MAIN COMPONENT
+export default function HomeScreen() {
+  const [recommended, setRecommended] = useState([]);
+
+  useEffect(() => {
+    const mixed = [
+      ...appsData.games.slice(0, 3),
+      ...appsData.apps.slice(0, 2),
+    ].sort(() => Math.random() - 0.5);
+    setRecommended(mixed);
+  }, []);
+
+  const handleInstall = (app) => alert(`Installing ${app.name}... 🚀`);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+
+      <View style={styles.search}>
+        <Text style={styles.searchPlaceholder}>🔍 Search apps & games...</Text>
+      </View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.section}>
+          <SectionHeader title="🎮 Popular Games" />
+          <FlatList
+            data={appsData.games}
+            renderItem={({ item }) => <AppCard item={item} onInstall={handleInstall} />}
+            keyExtractor={item => item.id}
+            scrollEnabled={false}
+          />
+        </View>
+
+        <View style={styles.section}>
+          <SectionHeader title="🔥 Trending Apps" />
+          <FlatList
+            data={appsData.apps}
+            renderItem={({ item }) => <AppCard item={item} onInstall={handleInstall} />}
+            keyExtractor={item => item.id}
+            scrollEnabled={false}
+          />
+        </View>
+
+        <View style={styles.section}>
+          <SectionHeader title="⭐ Recommended for You" />
+          <FlatList
+            data={recommended}
+            renderItem={({ item }) => <AppCard item={item} onInstall={handleInstall} />}
+            keyExtractor={item => item.id}
+            scrollEnabled={false}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#F8FAFC' },
+  search: { margin: 16, padding: 14, backgroundColor: '#fff', borderRadius: 30, borderWidth: 1, borderColor: '#E2E8F0', shadowColor: '#000', shadowOpacity: 0.08, elevation: 3 },
+  searchPlaceholder: { fontSize: 15, color: '#64748B' },
+  section: { marginBottom: 24 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 16, marginBottom: 12 },
+  title: { fontSize: 20, fontWeight: '700', color: '#0F172A' },
+  seeAll: { color: '#6366F1', fontWeight: '600' },
+  card: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', marginHorizontal: 12, marginVertical: 6, padding: 14, borderRadius: 16, shadowColor: '#000', shadowOpacity: 0.1, elevation: 5 },
+  cardPressed: { transform: [{ scale: 0.97 }] },
+  icon: { width: 64, height: 64, borderRadius: 16, marginRight: 14 },
+  content: { flex: 1 },
+  name: { fontSize: 16, fontWeight: '600', marginBottom: 3 },
+  category: { fontSize: 13, color: '#64748B', marginBottom: 4 },
+  meta: { fontSize: 12, color: '#F59E0B' },
+  installSolid: { backgroundColor: '#10b981', paddingHorizontal: 20, paddingVertical: 8, borderRadius: 20, minWidth: 85, alignItems: 'center' },
+  installGradient: { paddingHorizontal: 20, paddingVertical: 8, borderRadius: 20, minWidth: 85, alignItems: 'center' },
+  installText: { color: '#fff', fontWeight: '700', fontSize: 13 },
+});
+
+
+
